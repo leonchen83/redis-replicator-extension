@@ -1,0 +1,14 @@
+language: java
+sudo: required
+jdk:
+    - oraclejdk7
+    - oraclejdk8
+    - openjdk7
+branches:
+  only:
+    - master
+services:
+  - redis-server
+script: "mvn clean package -P travis"
+after_success:
+  - mvn clean test jacoco:report coveralls:report

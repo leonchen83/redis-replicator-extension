@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.moilioncircle.redis.replicator.extension;
+package com.moilioncircle.redis.replicator.extension.module.rdb.impl;
+
+import com.moilioncircle.redis.replicator.rdb.datatype.Module;
 
 /**
  * @author Leon Chen
  * @since 1.0.0
  */
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("hello world");
-    }
+public class JsonModule implements Module {
 }

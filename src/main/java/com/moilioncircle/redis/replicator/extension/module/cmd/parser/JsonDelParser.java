@@ -14,11 +14,23 @@
  * limitations under the License.
  */
 
-package com.moilioncircle.redis.replicator.extension.module.cmd;
+package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
+
+import com.moilioncircle.redis.replicator.cmd.CommandParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonDelCommand;
 
 /**
  * @author Leon Chen
  * @since 1.0.0
  */
-public class Test {
+public class JsonDelParser implements CommandParser<JsonDelCommand> {
+
+    @Override
+    public JsonDelCommand parse(Object[] command) {
+        int idx = 1;
+        String key = (String) command[idx++];
+        String path = (String) command[idx++];
+        return new JsonDelCommand(key, path);
+    }
+
 }

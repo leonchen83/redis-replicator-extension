@@ -14,11 +14,24 @@
  * limitations under the License.
  */
 
-package com.moilioncircle.redis.replicator.extension.module.rdb;
+package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
+
+import com.moilioncircle.redis.replicator.cmd.CommandParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonSetCommand;
 
 /**
  * @author Leon Chen
  * @since 1.0.0
  */
-public class Test {
+public class JsonSetParser implements CommandParser<JsonSetCommand> {
+
+    @Override
+    public JsonSetCommand parse(Object[] command) {
+        int idx = 1;
+        String key = (String) command[idx++];
+        String path = (String) command[idx++];
+        String json = (String) command[idx++];
+        return new JsonSetCommand(key, path, json);
+    }
+
 }

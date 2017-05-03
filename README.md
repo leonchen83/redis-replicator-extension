@@ -6,6 +6,18 @@
   
 `redis-replicator` 's third party modules extension.  
 
-# 2. Supported modules
+# 2. Requirements  
+
+* redis-replicator version >= 2.1.2
+
+```java  
+    <dependency>
+        <groupId>com.moilioncircle</groupId>
+        <artifactId>redis-replicator</artifactId>
+        <version>2.1.2</version>
+    </dependency>
+```
+
+# 3. Supported modules
 
 **rejson**

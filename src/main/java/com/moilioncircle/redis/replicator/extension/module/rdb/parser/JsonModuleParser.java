@@ -71,7 +71,7 @@ public class JsonModuleParser implements ModuleParser<JsonModule> {
         while (state != S_END) {
             switch (state) {
                 case S_INIT:
-                    type = (int) parser.loadSigned();
+                    type = parser.loadUnsigned().intValue();
                     state = S_BEGIN_VALUE;
                     break;
                 case S_BEGIN_VALUE:
@@ -103,13 +103,13 @@ public class JsonModuleParser implements ModuleParser<JsonModule> {
                             state = S_CONTAINER;
                             break;
                         case N_DICT:
-                            int len = (int) parser.loadSigned();
+                            int len = parser.loadUnsigned().intValue();
                             nodes.push(new JsonObject(ordered));
                             indices.push(len);
                             state = S_CONTAINER;
                             break;
                         case N_ARRAY:
-                            len = (int) parser.loadSigned();
+                            len = parser.loadUnsigned().intValue();
                             nodes.push(new JsonArray());
                             indices.push(len);
                             state = S_CONTAINER;
@@ -137,7 +137,7 @@ public class JsonModuleParser implements ModuleParser<JsonModule> {
                     if (len > 0) {
                         indices.pop();
                         indices.push(len - 1);
-                        type = (int) parser.loadSigned();
+                        type = parser.loadUnsigned().intValue();
                         state = S_BEGIN_VALUE;
                     } else {
                         indices.pop();

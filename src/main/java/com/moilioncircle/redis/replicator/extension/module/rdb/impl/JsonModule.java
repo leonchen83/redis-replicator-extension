@@ -23,4 +23,39 @@ import com.moilioncircle.redis.replicator.rdb.datatype.Module;
  * @since 1.0.0
  */
 public class JsonModule implements Module {
+
+    private Object json;
+
+    public JsonModule() {
+    }
+
+    public JsonModule(Object json) {
+        this.json = json;
+    }
+
+    /**
+     * Type : null
+     *        Long
+     *        Double
+     *        String
+     *        Boolean
+     *        JsonArray
+     *        JsonObject
+     *        AbstractMap.SimpleEntry<String, Object>
+     * @return json object
+     */
+    public Object getJson() {
+        return json;
+    }
+
+    public void setJson(Object json) {
+        this.json = json;
+    }
+
+    @Override
+    public String toString() {
+        return "JsonModule{" +
+                "json=" + json +
+                '}';
+    }
 }

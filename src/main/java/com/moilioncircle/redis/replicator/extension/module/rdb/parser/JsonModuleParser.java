@@ -31,8 +31,8 @@ import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.Jso
 
 /**
  * @author Leon Chen
- * @since 1.0.0
  * @see <a href="https://github.com/RedisLabsModules/rejson">https://github.com/RedisLabsModules/rejson</a>
+ * @since 1.0.0
  * JSONTYPE_NAME : ReJSON-RL
  * JSONTYPE_ENCODING_VERSION : 0
  */

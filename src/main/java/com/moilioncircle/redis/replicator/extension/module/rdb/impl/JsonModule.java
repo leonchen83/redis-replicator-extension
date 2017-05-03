@@ -41,7 +41,7 @@ public class JsonModule implements Module {
      *        Boolean
      *        JsonArray
      *        JsonObject
-     *        AbstractMap.SimpleEntry<String, Object>
+     *        AbstractMap.SimpleEntry{@literal <}String, Object{@literal >}
      * @return json object
      */
     public Object getJson() {

@@ -5,3 +5,7 @@
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)](https://github.com/leonchen83/redis-replicator-extension/blob/master/LICENSE)  
   
 `redis-replicator` 's third party modules extension.  
+
+# 2. Supported modules
+
+**rejson**

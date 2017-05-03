@@ -16,12 +16,12 @@
 
 package com.moilioncircle.redis.replicator.extension.module.rdb.parser;
 
+import com.moilioncircle.redis.replicator.extension.module.VersionableModuleParser;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonArray;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonModule;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonObject;
 import com.moilioncircle.redis.replicator.io.RedisInputStream;
 import com.moilioncircle.redis.replicator.rdb.module.DefaultRdbModuleParser;
-import com.moilioncircle.redis.replicator.rdb.module.ModuleParser;
 
 import java.io.IOException;
 import java.util.AbstractMap;
@@ -34,10 +34,8 @@ import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.Jso
  * @author Leon Chen
  * @see <a href="https://github.com/RedisLabsModules/rejson">https://github.com/RedisLabsModules/rejson</a>
  * @since 1.0.0
- * JSONTYPE_NAME : ReJSON-RL
- * JSONTYPE_ENCODING_VERSION : 0
  */
-public class JsonModuleParser implements ModuleParser<JsonModule> {
+public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
 
     private static final int N_NULL = 0x1;
     private static final int N_DICT = 0x20;
@@ -47,6 +45,16 @@ public class JsonModuleParser implements ModuleParser<JsonModule> {
     private static final int N_KEYVAL = 0x80;
     private static final int N_INTEGER = 0x8;
     private static final int N_BOOLEAN = 0x10;
+
+    @Override
+    public int version() {
+        return 0;
+    }
+
+    @Override
+    public String name() {
+        return "ReJSON-RL";
+    }
 
     enum State {S_INIT, S_BEGIN_VALUE, S_END_VALUE, S_CONTAINER, S_END}
 

@@ -16,14 +16,15 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.cmd.CommandParser;
+import com.moilioncircle.redis.replicator.cmd.CommandName;
+import com.moilioncircle.redis.replicator.extension.module.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonSetCommand;
 
 /**
  * @author Leon Chen
  * @since 1.0.0
  */
-public class JsonSetParser implements CommandParser<JsonSetCommand> {
+public class JsonSetParser implements NameableCommandParser<JsonSetCommand> {
 
     @Override
     public JsonSetCommand parse(Object[] command) {
@@ -34,4 +35,8 @@ public class JsonSetParser implements CommandParser<JsonSetCommand> {
         return new JsonSetCommand(key, path, json);
     }
 
+    @Override
+    public CommandName name() {
+        return CommandName.name("JSON.SET");
+    }
 }

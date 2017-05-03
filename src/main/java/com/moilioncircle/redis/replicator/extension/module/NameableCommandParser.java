@@ -14,28 +14,20 @@
  * limitations under the License.
  */
 
-package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
+package com.moilioncircle.redis.replicator.extension.module;
 
+import com.moilioncircle.redis.replicator.cmd.Command;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
-import com.moilioncircle.redis.replicator.extension.module.NameableCommandParser;
-import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonDelCommand;
+import com.moilioncircle.redis.replicator.cmd.CommandParser;
 
 /**
  * @author Leon Chen
  * @since 1.0.0
  */
-public class JsonDelParser implements NameableCommandParser<JsonDelCommand> {
+public interface NameableCommandParser<T extends Command> extends CommandParser<T> {
 
-    @Override
-    public JsonDelCommand parse(Object[] command) {
-        int idx = 1;
-        String key = (String) command[idx++];
-        String path = (String) command[idx++];
-        return new JsonDelCommand(key, path);
-    }
-
-    @Override
-    public CommandName name() {
-        return CommandName.name("JSON.DEL");
-    }
+    /**
+     * @return command name
+     */
+    CommandName name();
 }

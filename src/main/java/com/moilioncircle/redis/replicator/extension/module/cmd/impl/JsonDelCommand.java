@@ -20,7 +20,7 @@ import com.moilioncircle.redis.replicator.cmd.Command;
 
 /**
  * @author Leon Chen
- * @see [https://github.com/RedisLabsModules/rejson]
+ * @see <a href="https://github.com/RedisLabsModules/rejson">https://github.com/RedisLabsModules/rejson</a>
  * @since 1.0.0
  */
 public class JsonDelCommand implements Command {

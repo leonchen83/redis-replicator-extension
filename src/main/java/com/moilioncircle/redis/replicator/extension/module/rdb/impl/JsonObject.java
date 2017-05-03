@@ -36,9 +36,7 @@ public class JsonObject implements Map<String, Object> {
 
     @Override
     public String toString() {
-        return "JsonObject{" +
-                "map=" + map +
-                '}';
+        return map.toString();
     }
 
     @Override

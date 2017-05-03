@@ -34,9 +34,7 @@ public class JsonArray implements Collection<Object> {
 
     @Override
     public String toString() {
-        return "JsonArray{" +
-                "list=" + list +
-                '}';
+        return list.toString();
     }
 
     @Override

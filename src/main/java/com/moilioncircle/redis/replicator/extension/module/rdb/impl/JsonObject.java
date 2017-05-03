@@ -25,8 +25,8 @@ import java.util.*;
 public class JsonObject implements Map<String, Object> {
     private final Map<String, Object> map;
 
-    public JsonObject(boolean isOrdered) {
-        this.map = isOrdered ? new LinkedHashMap<String, Object>() : new HashMap<String, Object>();
+    public JsonObject(boolean ordered) {
+        this.map = ordered ? new LinkedHashMap<String, Object>() : new HashMap<String, Object>();
     }
 
     public JsonObject() {

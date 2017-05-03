@@ -25,7 +25,8 @@ import com.moilioncircle.redis.replicator.rdb.module.ModuleParser;
 
 import java.io.IOException;
 import java.util.AbstractMap;
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.*;
 
@@ -64,8 +65,8 @@ public class JsonModuleParser implements ModuleParser<JsonModule> {
     public JsonModule parse(RedisInputStream in) throws IOException {
         DefaultRdbModuleParser parser = new DefaultRdbModuleParser(in);
         State state = S_INIT;
-        Stack<Object> nodes = new Stack<>();
-        Stack<Integer> indices = new Stack<>();
+        Deque<Object> nodes = new LinkedList<>();
+        Deque<Integer> indices = new LinkedList<>();
         Object node = null;
         int type = -1;
         while (state != S_END) {

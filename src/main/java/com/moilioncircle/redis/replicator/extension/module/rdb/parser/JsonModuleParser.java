@@ -38,17 +38,21 @@ import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.Jso
 public class JsonModuleParser implements ModuleParser<JsonModule> {
 
     private static final int N_NULL = 0x1;
-    private static final int N_STRING = 0x2;
-    private static final int N_NUMBER = 0x4;
-    private static final int N_INTEGER = 0x8;
-    private static final int N_BOOLEAN = 0x10;
     private static final int N_DICT = 0x20;
     private static final int N_ARRAY = 0x40;
+    private static final int N_STRING = 0x2;
+    private static final int N_NUMBER = 0x4;
     private static final int N_KEYVAL = 0x80;
+    private static final int N_INTEGER = 0x8;
+    private static final int N_BOOLEAN = 0x10;
 
     enum State {S_INIT, S_BEGIN_VALUE, S_END_VALUE, S_CONTAINER, S_END}
 
     private final boolean ordered;
+
+    public JsonModuleParser() {
+        this(false);
+    }
 
     public JsonModuleParser(boolean ordered) {
         this.ordered = ordered;

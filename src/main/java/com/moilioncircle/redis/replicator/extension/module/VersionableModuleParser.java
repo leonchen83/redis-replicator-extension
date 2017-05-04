@@ -36,6 +36,7 @@ public interface VersionableModuleParser<T extends Module> extends ModuleParser<
 
     /**
      * @return module version
+     * <p>
      * version range {@literal 0 <= version < 1024}
      */
     int version();

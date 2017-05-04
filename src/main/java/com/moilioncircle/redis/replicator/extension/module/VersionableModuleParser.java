@@ -22,16 +22,21 @@ import com.moilioncircle.redis.replicator.rdb.module.ModuleParser;
 /**
  * @author Leon Chen
  * @since 1.0.0
+ * @see <a href="https://github.com/antirez/redis/blob/unstable/src/modules/TYPES.md">TYPES.md</a>
  */
 public interface VersionableModuleParser<T extends Module> extends ModuleParser<T> {
 
     /**
-     * @return module version
-     */
-    int version();
-
-    /**
-     * @return module name
+     * @return module type name
+     * modules types require a 9 characters name
+     * <p>
+     * regex: [a-zA-Z-_]{@literal {9}}
      */
     String name();
+
+    /**
+     * @return module version
+     * version range {@literal 0 <= version < 1024}
+     */
+    int version();
 }

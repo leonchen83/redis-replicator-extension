@@ -46,16 +46,6 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
     private static final int N_INTEGER = 0x8;
     private static final int N_BOOLEAN = 0x10;
 
-    @Override
-    public int version() {
-        return 0;
-    }
-
-    @Override
-    public String name() {
-        return "ReJSON-RL";
-    }
-
     enum State {S_INIT, S_BEGIN_VALUE, S_END_VALUE, S_CONTAINER, S_END}
 
     private final boolean ordered;
@@ -159,5 +149,15 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
             }
         }
         return new JsonModule(node);
+    }
+
+    @Override
+    public String name() {
+        return "ReJSON-RL";
+    }
+
+    @Override
+    public int version() {
+        return 0;
     }
 }

@@ -16,6 +16,14 @@
 
 package com.moilioncircle.redis.replicator.extension.module;
 
+import com.moilioncircle.redis.replicator.Configuration;
+import com.moilioncircle.redis.replicator.FileType;
+import com.moilioncircle.redis.replicator.RedisReplicator;
+import com.moilioncircle.redis.replicator.Replicator;
+import com.moilioncircle.redis.replicator.cmd.Command;
+import com.moilioncircle.redis.replicator.cmd.CommandListener;
+import com.moilioncircle.redis.replicator.rdb.RdbListener;
+import com.moilioncircle.redis.replicator.rdb.datatype.KeyValuePair;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -27,23 +35,23 @@ import java.io.IOException;
 public class ModulesTest {
     @Test
     public void testRejson() throws IOException {
-//        Replicator replicator = new RedisReplicator(
-//                ModulesTest.class.getClassLoader().getResourceAsStream("rejson.aof"),
-//                FileType.MIXED, Configuration.defaultSetting());
-//        Modules.rejson(replicator);
-//        replicator.addCommandListener(new CommandListener() {
-//            @Override
-//            public void handle(Replicator replicator, Command command) {
-//                System.out.println(command);
-//            }
-//        });
-//        replicator.addRdbListener(new RdbListener.Adaptor() {
-//            @Override
-//            public void handle(Replicator replicator, KeyValuePair<?> kv) {
-//                System.out.println(kv);
-//            }
-//        });
-//        replicator.open();
+        Replicator replicator = new RedisReplicator(
+                ModulesTest.class.getClassLoader().getResourceAsStream("appendonly.aof"),
+                FileType.MIXED, Configuration.defaultSetting());
+        Modules.rejson(replicator);
+        replicator.addCommandListener(new CommandListener() {
+            @Override
+            public void handle(Replicator replicator, Command command) {
+                System.out.println(command);
+            }
+        });
+        replicator.addRdbListener(new RdbListener.Adaptor() {
+            @Override
+            public void handle(Replicator replicator, KeyValuePair<?> kv) {
+                System.out.println(kv);
+            }
+        });
+        replicator.open();
     }
 
 }

@@ -80,7 +80,8 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
                             state = S_END_VALUE;
                             break;
                         case N_BOOLEAN:
-                            node = parser.loadStringBuffer().equals("1");
+                            String str = parser.loadStringBuffer();
+                            node = str.getBytes()[0] == 0x1;
                             state = S_END_VALUE;
                             break;
                         case N_INTEGER:
@@ -96,7 +97,7 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
                             state = S_END_VALUE;
                             break;
                         case N_KEYVAL:
-                            String str = parser.loadStringBuffer();
+                            str = parser.loadStringBuffer();
                             nodes.push(new AbstractMap.SimpleEntry<>(str, null));
                             indices.push(1);
                             state = S_CONTAINER;

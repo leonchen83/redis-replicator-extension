@@ -16,7 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.rdb.parser;
 
-import com.moilioncircle.redis.replicator.extension.module.VersionableModuleParser;
+import com.moilioncircle.redis.replicator.extension.module.rdb.VersionableModuleParser;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonArray;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonModule;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonObject;

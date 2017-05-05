@@ -17,7 +17,7 @@
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
 import com.moilioncircle.redis.replicator.cmd.CommandName;
-import com.moilioncircle.redis.replicator.extension.module.NameableCommandParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonNumIncrByCommand;
 
 /**

@@ -14,30 +14,20 @@
  * limitations under the License.
  */
 
-package com.moilioncircle.redis.replicator.extension.module;
+package com.moilioncircle.redis.replicator.extension.module.cmd;
 
-import com.moilioncircle.redis.replicator.rdb.datatype.Module;
-import com.moilioncircle.redis.replicator.rdb.module.ModuleParser;
+import com.moilioncircle.redis.replicator.cmd.Command;
+import com.moilioncircle.redis.replicator.cmd.CommandName;
+import com.moilioncircle.redis.replicator.cmd.CommandParser;
 
 /**
  * @author Leon Chen
- * @see <a href="https://github.com/antirez/redis/blob/unstable/src/modules/TYPES.md">TYPES.md</a>
  * @since 1.0.0
  */
-public interface VersionableModuleParser<T extends Module> extends ModuleParser<T> {
+public interface NameableCommandParser<T extends Command> extends CommandParser<T> {
 
     /**
-     * @return module type name
-     * modules types require a 9 characters name
-     * <p>
-     * regex: [a-zA-Z-_]{@literal {9}}
+     * @return command name
      */
-    String name();
-
-    /**
-     * @return module version
-     * <p>
-     * version range {@literal 0 <= version < 1024}
-     */
-    int version();
+    CommandName name();
 }

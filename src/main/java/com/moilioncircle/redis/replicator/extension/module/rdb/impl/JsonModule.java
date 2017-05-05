@@ -35,13 +35,14 @@ public class JsonModule implements Module {
 
     /**
      * Type : null
-     *        Long
-     *        Double
-     *        String
-     *        Boolean
-     *        JsonArray
-     *        JsonObject
-     *        AbstractMap.SimpleEntry{@literal <String, Object>}
+     * Long
+     * Double
+     * String
+     * Boolean
+     * JsonArray
+     * JsonObject
+     * AbstractMap.SimpleEntry{@literal <String, Object>}
+     *
      * @return json object
      */
     public Object getJson() {

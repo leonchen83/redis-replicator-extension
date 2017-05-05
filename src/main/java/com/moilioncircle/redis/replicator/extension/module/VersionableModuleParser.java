@@ -21,8 +21,8 @@ import com.moilioncircle.redis.replicator.rdb.module.ModuleParser;
 
 /**
  * @author Leon Chen
- * @since 1.0.0
  * @see <a href="https://github.com/antirez/redis/blob/unstable/src/modules/TYPES.md">TYPES.md</a>
+ * @since 1.0.0
  */
 public interface VersionableModuleParser<T extends Module> extends ModuleParser<T> {
 

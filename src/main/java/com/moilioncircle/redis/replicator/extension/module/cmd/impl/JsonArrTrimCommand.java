@@ -17,27 +17,26 @@
 package com.moilioncircle.redis.replicator.extension.module.cmd.impl;
 
 import com.moilioncircle.redis.replicator.cmd.Command;
-import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
 
 /**
  * @author Leon Chen
- * @see <a href="https://github.com/RedisLabsModules/rejson">JSON.SET</a>
+ * @see <a href="https://github.com/RedisLabsModules/rejson">JSON.ARRTRIM</a>
  * @since 1.0.0
  */
-public class JsonSetCommand implements Command {
+public class JsonArrTrimCommand implements Command {
     private String key;
     private String path;
-    private String json;
-    private ExistType type;
+    private int start;
+    private int stop;
 
-    public JsonSetCommand() {
+    public JsonArrTrimCommand() {
     }
 
-    public JsonSetCommand(String key, String path, String json, ExistType type) {
+    public JsonArrTrimCommand(String key, String path, int start, int stop) {
         this.key = key;
         this.path = path;
-        this.json = json;
-        this.type = type;
+        this.start = start;
+        this.stop = stop;
     }
 
     public String getKey() {
@@ -56,29 +55,29 @@ public class JsonSetCommand implements Command {
         this.path = path;
     }
 
-    public String getJson() {
-        return json;
+    public int getStart() {
+        return start;
     }
 
-    public void setJson(String json) {
-        this.json = json;
+    public void setStart(int start) {
+        this.start = start;
     }
 
-    public ExistType getType() {
-        return type;
+    public int getStop() {
+        return stop;
     }
 
-    public void setType(ExistType type) {
-        this.type = type;
+    public void setStop(int stop) {
+        this.stop = stop;
     }
 
     @Override
     public String toString() {
-        return "JsonSetCommand{" +
+        return "JsonArrTrimCommand{" +
                 "key='" + key + '\'' +
                 ", path='" + path + '\'' +
-                ", json='" + json + '\'' +
-                ", type=" + type +
+                ", start=" + start +
+                ", stop=" + stop +
                 '}';
     }
 }

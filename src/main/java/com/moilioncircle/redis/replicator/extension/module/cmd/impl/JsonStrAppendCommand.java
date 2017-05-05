@@ -17,27 +17,24 @@
 package com.moilioncircle.redis.replicator.extension.module.cmd.impl;
 
 import com.moilioncircle.redis.replicator.cmd.Command;
-import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
 
 /**
  * @author Leon Chen
- * @see <a href="https://github.com/RedisLabsModules/rejson">JSON.SET</a>
+ * @see <a href="https://github.com/RedisLabsModules/rejson">JSON.STRAPPEND</a>
  * @since 1.0.0
  */
-public class JsonSetCommand implements Command {
+public class JsonStrAppendCommand implements Command {
     private String key;
     private String path;
     private String json;
-    private ExistType type;
 
-    public JsonSetCommand() {
+    public JsonStrAppendCommand() {
     }
 
-    public JsonSetCommand(String key, String path, String json, ExistType type) {
+    public JsonStrAppendCommand(String key, String path, String json) {
         this.key = key;
         this.path = path;
         this.json = json;
-        this.type = type;
     }
 
     public String getKey() {
@@ -64,21 +61,12 @@ public class JsonSetCommand implements Command {
         this.json = json;
     }
 
-    public ExistType getType() {
-        return type;
-    }
-
-    public void setType(ExistType type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
-        return "JsonSetCommand{" +
+        return "JsonStrAppendCommand{" +
                 "key='" + key + '\'' +
                 ", path='" + path + '\'' +
                 ", json='" + json + '\'' +
-                ", type=" + type +
                 '}';
     }
 }

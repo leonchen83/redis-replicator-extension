@@ -17,33 +17,27 @@
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
 import com.moilioncircle.redis.replicator.cmd.CommandName;
-import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
 import com.moilioncircle.redis.replicator.extension.module.NameableCommandParser;
-import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonSetCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrPopCommand;
+
+import java.math.BigDecimal;
 
 /**
  * @author Leon Chen
  * @since 1.0.0
  */
-public class JsonSetParser implements NameableCommandParser<JsonSetCommand> {
-
+public class JsonArrPopParser implements NameableCommandParser<JsonArrPopCommand> {
     @Override
-    public JsonSetCommand parse(Object[] command) {
+    public JsonArrPopCommand parse(Object[] command) {
         int idx = 1;
         String key = (String) command[idx++];
-        String path = (String) command[idx++];
-        String json = (String) command[idx++];
-        ExistType type = ExistType.NONE;
-        if (idx < command.length) {
-            String str = (String) command[idx++];
-            if (str.equalsIgnoreCase("NX")) type = ExistType.NX;
-            else if (str.equalsIgnoreCase("XX")) type = ExistType.XX;
-        }
-        return new JsonSetCommand(key, path, json, type);
+        String path = idx == command.length ? "." : (String) command[idx++];
+        int index = idx == command.length ? -1 : new BigDecimal((String) command[idx++]).intValueExact();
+        return new JsonArrPopCommand(key, path, index);
     }
 
     @Override
     public CommandName name() {
-        return CommandName.name("JSON.SET");
+        return CommandName.name("JSON.ARRPOP");
     }
 }

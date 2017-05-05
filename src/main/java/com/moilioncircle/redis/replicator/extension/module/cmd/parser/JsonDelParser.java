@@ -30,7 +30,7 @@ public class JsonDelParser implements NameableCommandParser<JsonDelCommand> {
     public JsonDelCommand parse(Object[] command) {
         int idx = 1;
         String key = (String) command[idx++];
-        String path = (String) command[idx++];
+        String path = idx == command.length ? "." : (String) command[idx++];
         return new JsonDelCommand(key, path);
     }
 

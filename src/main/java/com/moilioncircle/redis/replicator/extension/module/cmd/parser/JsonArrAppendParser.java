@@ -17,33 +17,28 @@
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
 import com.moilioncircle.redis.replicator.cmd.CommandName;
-import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
 import com.moilioncircle.redis.replicator.extension.module.NameableCommandParser;
-import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonSetCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrAppendCommand;
 
 /**
  * @author Leon Chen
  * @since 1.0.0
  */
-public class JsonSetParser implements NameableCommandParser<JsonSetCommand> {
-
+public class JsonArrAppendParser implements NameableCommandParser<JsonArrAppendCommand> {
     @Override
-    public JsonSetCommand parse(Object[] command) {
-        int idx = 1;
+    public JsonArrAppendCommand parse(Object[] command) {
+        int idx = 1, newIdx = 0;
         String key = (String) command[idx++];
         String path = (String) command[idx++];
-        String json = (String) command[idx++];
-        ExistType type = ExistType.NONE;
-        if (idx < command.length) {
-            String str = (String) command[idx++];
-            if (str.equalsIgnoreCase("NX")) type = ExistType.NX;
-            else if (str.equalsIgnoreCase("XX")) type = ExistType.XX;
+        String[] jsons = new String[command.length - idx];
+        while (idx < command.length) {
+            jsons[newIdx++] = (String) command[idx++];
         }
-        return new JsonSetCommand(key, path, json, type);
+        return new JsonArrAppendCommand(key, path, jsons);
     }
 
     @Override
     public CommandName name() {
-        return CommandName.name("JSON.SET");
+        return CommandName.name("JSON.ARRAPPEND");
     }
 }

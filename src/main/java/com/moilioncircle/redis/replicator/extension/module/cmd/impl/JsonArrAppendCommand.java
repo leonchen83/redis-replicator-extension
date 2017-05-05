@@ -17,27 +17,26 @@
 package com.moilioncircle.redis.replicator.extension.module.cmd.impl;
 
 import com.moilioncircle.redis.replicator.cmd.Command;
-import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
+
+import java.util.Arrays;
 
 /**
  * @author Leon Chen
- * @see <a href="https://github.com/RedisLabsModules/rejson">JSON.SET</a>
+ * @see <a href="https://github.com/RedisLabsModules/rejson">JSON.ARRAPPEND</a>
  * @since 1.0.0
  */
-public class JsonSetCommand implements Command {
+public class JsonArrAppendCommand implements Command {
     private String key;
     private String path;
-    private String json;
-    private ExistType type;
+    private String[] jsons;
 
-    public JsonSetCommand() {
+    public JsonArrAppendCommand() {
     }
 
-    public JsonSetCommand(String key, String path, String json, ExistType type) {
+    public JsonArrAppendCommand(String key, String path, String[] jsons) {
         this.key = key;
         this.path = path;
-        this.json = json;
-        this.type = type;
+        this.jsons = jsons;
     }
 
     public String getKey() {
@@ -56,29 +55,20 @@ public class JsonSetCommand implements Command {
         this.path = path;
     }
 
-    public String getJson() {
-        return json;
+    public String[] getJsons() {
+        return jsons;
     }
 
-    public void setJson(String json) {
-        this.json = json;
-    }
-
-    public ExistType getType() {
-        return type;
-    }
-
-    public void setType(ExistType type) {
-        this.type = type;
+    public void setJsons(String[] jsons) {
+        this.jsons = jsons;
     }
 
     @Override
     public String toString() {
-        return "JsonSetCommand{" +
+        return "JsonArrAppendCommand{" +
                 "key='" + key + '\'' +
                 ", path='" + path + '\'' +
-                ", json='" + json + '\'' +
-                ", type=" + type +
+                ", jsons=" + Arrays.toString(jsons) +
                 '}';
     }
 }

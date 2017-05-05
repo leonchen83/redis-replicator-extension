@@ -21,14 +21,8 @@ import com.moilioncircle.redis.replicator.RedisReplicator;
 import com.moilioncircle.redis.replicator.Replicator;
 import com.moilioncircle.redis.replicator.cmd.Command;
 import com.moilioncircle.redis.replicator.cmd.CommandListener;
-import com.moilioncircle.redis.replicator.extension.module.NameableCommandParser;
-import com.moilioncircle.redis.replicator.extension.module.VersionableModuleParser;
-import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonDelCommand;
-import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonSetCommand;
-import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonDelParser;
-import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonSetParser;
+import com.moilioncircle.redis.replicator.extension.module.Modules;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonModule;
-import com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser;
 import com.moilioncircle.redis.replicator.rdb.RdbListener;
 import com.moilioncircle.redis.replicator.rdb.datatype.KeyStringValueModule;
 import com.moilioncircle.redis.replicator.rdb.datatype.KeyValuePair;
@@ -43,12 +37,7 @@ import java.io.IOException;
 public class ReJsonExample {
     public static void main(String[] args) throws IOException {
         Replicator r = new RedisReplicator("127.0.0.1", 6379, Configuration.defaultSetting());
-        NameableCommandParser<JsonSetCommand> jsonSetParser = new JsonSetParser();
-        NameableCommandParser<JsonDelCommand> jsonDelParser = new JsonDelParser();
-        VersionableModuleParser<JsonModule> jsonModuleParser = new JsonModuleParser(true);
-        r.addCommandParser(jsonSetParser.name(), jsonSetParser);
-        r.addCommandParser(jsonDelParser.name(), jsonDelParser);
-        r.addModuleParser(jsonModuleParser.name(), jsonModuleParser.version(), jsonModuleParser);
+        Modules.rejson(r);
         r.addCommandListener(new CommandListener() {
             @Override
             public void handle(Replicator replicator, Command command) {

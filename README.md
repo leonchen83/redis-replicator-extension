@@ -21,3 +21,7 @@
 # 3. Supported modules
 
 **rejson**
+
+# 4. Document  
+
+ * [document](https://github.com/leonchen83/redis-replicator-extension/wiki)  

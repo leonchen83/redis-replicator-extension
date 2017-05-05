@@ -20,6 +20,7 @@ public class ReJsonCommandTest {
             assertEquals("path", command.getPath());
             assertEquals("[true]", command.getJson());
             assertEquals(ExistType.NX, command.getType());
+            System.out.println(command);
         }
 
         {
@@ -38,6 +39,7 @@ public class ReJsonCommandTest {
                     new Object[]{"json.del", "key"});
             assertEquals("key", command.getKey());
             assertEquals(".", command.getPath());
+            System.out.println(command);
         }
 
         {
@@ -56,6 +58,7 @@ public class ReJsonCommandTest {
             assertEquals("path", command.getPath());
             assertEquals("true", command.getJsons()[0]);
             assertEquals("null", command.getJsons()[1]);
+            System.out.println(command);
         }
 
         {
@@ -75,6 +78,7 @@ public class ReJsonCommandTest {
             assertEquals("path", command.getPath());
             assertEquals(0, command.getIndex());
             assertEquals("true", command.getJsons()[0]);
+            System.out.println(command);
         }
 
         {
@@ -95,6 +99,7 @@ public class ReJsonCommandTest {
             assertEquals("key", command.getKey());
             assertEquals(".", command.getPath());
             assertEquals(-1, command.getIndex());
+            System.out.println(command);
         }
 
         {
@@ -123,6 +128,7 @@ public class ReJsonCommandTest {
             assertEquals("path", command.getPath());
             assertEquals(100, command.getStart());
             assertEquals(200, command.getStop());
+            System.out.println(command);
         }
 
         {
@@ -132,6 +138,7 @@ public class ReJsonCommandTest {
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals(100.542d, command.getValue(), 0.000001);
+            System.out.println(command);
         }
 
         {
@@ -150,6 +157,7 @@ public class ReJsonCommandTest {
             assertEquals("key", command.getKey());
             assertEquals(".", command.getPath());
             assertEquals("world", command.getJson());
+            System.out.println(command);
         }
 
         {

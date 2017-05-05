@@ -4,6 +4,10 @@ jdk:
     - oraclejdk7
     - oraclejdk8
     - openjdk7
+addons:
+  hosts:
+    - whatever
+  hostname: whatever
 branches:
   only:
     - master

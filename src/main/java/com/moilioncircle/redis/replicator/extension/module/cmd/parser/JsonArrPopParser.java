@@ -16,6 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
+import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrPopCommand;
@@ -30,9 +31,9 @@ public class JsonArrPopParser implements NameableCommandParser<JsonArrPopCommand
     @Override
     public JsonArrPopCommand parse(Object[] command) {
         int idx = 1;
-        String key = (String) command[idx++];
-        String path = idx == command.length ? "." : (String) command[idx++];
-        int index = idx == command.length ? -1 : new BigDecimal((String) command[idx++]).intValueExact();
+        String key = new String((byte[]) command[idx++], Constants.CHARSET);
+        String path = idx == command.length ? "." : new String((byte[]) command[idx++], Constants.CHARSET);
+        int index = idx == command.length ? -1 : new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
         return new JsonArrPopCommand(key, path, index);
     }
 

@@ -16,6 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
+import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonStrAppendCommand;
@@ -29,9 +30,9 @@ public class JsonStrAppendParser implements NameableCommandParser<JsonStrAppendC
     @Override
     public JsonStrAppendCommand parse(Object[] command) {
         int idx = 1;
-        String key = (String) command[idx++];
-        String path = command.length < 4 ? "." : (String) command[idx++];
-        String json = (String) command[idx++];
+        String key = new String((byte[]) command[idx++], Constants.CHARSET);
+        String path = command.length < 4 ? "." : new String((byte[]) command[idx++], Constants.CHARSET);
+        String json = new String((byte[]) command[idx++], Constants.CHARSET);
         return new JsonStrAppendCommand(key, path, json);
     }
 

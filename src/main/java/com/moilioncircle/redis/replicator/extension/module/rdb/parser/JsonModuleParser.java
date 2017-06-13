@@ -16,6 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.rdb.parser;
 
+import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.extension.module.rdb.VersionableModuleParser;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonArray;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonModule;
@@ -80,8 +81,7 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
                             state = S_END_VALUE;
                             break;
                         case N_BOOLEAN:
-                            String str = parser.loadStringBuffer();
-                            node = str.getBytes()[0] == 0x1;
+                            node = parser.loadStringBuffer()[0] == 0x1;
                             state = S_END_VALUE;
                             break;
                         case N_INTEGER:
@@ -93,12 +93,11 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
                             state = S_END_VALUE;
                             break;
                         case N_STRING:
-                            node = parser.loadStringBuffer();
+                            node = new String(parser.loadStringBuffer(), Constants.CHARSET);
                             state = S_END_VALUE;
                             break;
                         case N_KEYVAL:
-                            str = parser.loadStringBuffer();
-                            nodes.push(new AbstractMap.SimpleEntry<>(str, null));
+                            nodes.push(new AbstractMap.SimpleEntry<>(new String(parser.loadStringBuffer(), Constants.CHARSET), null));
                             indices.push(1);
                             state = S_CONTAINER;
                             break;

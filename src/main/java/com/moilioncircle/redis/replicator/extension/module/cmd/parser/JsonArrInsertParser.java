@@ -16,6 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
+import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrInsertCommand;
@@ -31,12 +32,12 @@ public class JsonArrInsertParser implements NameableCommandParser<JsonArrInsertC
     @Override
     public JsonArrInsertCommand parse(Object[] command) {
         int idx = 1, newIdx = 0;
-        String key = (String) command[idx++];
-        String path = (String) command[idx++];
-        int index = new BigDecimal((String) command[idx++]).intValueExact();
+        String key = new String((byte[]) command[idx++], Constants.CHARSET);
+        String path = new String((byte[]) command[idx++], Constants.CHARSET);
+        int index = new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
         String[] jsons = new String[command.length - idx];
         while (idx < command.length) {
-            jsons[newIdx++] = (String) command[idx++];
+            jsons[newIdx++] = new String((byte[]) command[idx++], Constants.CHARSET);
         }
         return new JsonArrInsertCommand(key, path, index, jsons);
     }

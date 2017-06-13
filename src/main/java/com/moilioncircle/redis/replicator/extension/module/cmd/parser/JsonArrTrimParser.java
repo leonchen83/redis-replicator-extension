@@ -16,6 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
+import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrTrimCommand;
@@ -30,10 +31,10 @@ public class JsonArrTrimParser implements NameableCommandParser<JsonArrTrimComma
     @Override
     public JsonArrTrimCommand parse(Object[] command) {
         int idx = 1;
-        String key = (String) command[idx++];
-        String path = (String) command[idx++];
-        int start = new BigDecimal((String) command[idx++]).intValueExact();
-        int stop = new BigDecimal((String) command[idx++]).intValueExact();
+        String key = new String((byte[]) command[idx++], Constants.CHARSET);
+        String path = new String((byte[]) command[idx++], Constants.CHARSET);
+        int start = new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
+        int stop = new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
         return new JsonArrTrimCommand(key, path, start, stop);
     }
 

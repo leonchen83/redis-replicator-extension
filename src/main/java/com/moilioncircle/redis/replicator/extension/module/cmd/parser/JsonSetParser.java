@@ -16,6 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
+import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
@@ -30,12 +31,12 @@ public class JsonSetParser implements NameableCommandParser<JsonSetCommand> {
     @Override
     public JsonSetCommand parse(Object[] command) {
         int idx = 1;
-        String key = (String) command[idx++];
-        String path = (String) command[idx++];
-        String json = (String) command[idx++];
+        String key = new String((byte[]) command[idx++], Constants.CHARSET);
+        String path = new String((byte[]) command[idx++], Constants.CHARSET);
+        String json = new String((byte[]) command[idx++], Constants.CHARSET);
         ExistType type = ExistType.NONE;
         if (idx < command.length) {
-            String str = (String) command[idx++];
+            String str = new String((byte[]) command[idx++], Constants.CHARSET);
             if (str.equalsIgnoreCase("NX")) type = ExistType.NX;
             else if (str.equalsIgnoreCase("XX")) type = ExistType.XX;
         }

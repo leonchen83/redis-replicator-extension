@@ -16,6 +16,7 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
+import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonDelCommand;
@@ -29,8 +30,8 @@ public class JsonDelParser implements NameableCommandParser<JsonDelCommand> {
     @Override
     public JsonDelCommand parse(Object[] command) {
         int idx = 1;
-        String key = (String) command[idx++];
-        String path = idx == command.length ? "." : (String) command[idx++];
+        String key = new String((byte[]) command[idx++], Constants.CHARSET);
+        String path = idx == command.length ? "." : new String((byte[]) command[idx++], Constants.CHARSET);
         return new JsonDelCommand(key, path);
     }
 

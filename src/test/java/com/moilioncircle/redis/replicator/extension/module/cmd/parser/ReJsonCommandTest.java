@@ -26,13 +26,13 @@ import static org.junit.Assert.assertEquals;
  * @author Leon Chen
  * @since 1.0.0
  */
-public class ReJsonCommandTest {
+public class ReJsonCommandTest extends AbstractParserTest {
     @Test
     public void parse() throws Exception {
         {
             JsonSetParser parser = new JsonSetParser();
             JsonSetCommand command = parser.parse(
-                    new Object[]{"json.set", "key", "path", "[true]", "NX"});
+                    toObjectArray(new Object[]{"json.set", "key", "path", "[true]", "NX"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals("[true]", command.getJson());
@@ -43,7 +43,7 @@ public class ReJsonCommandTest {
         {
             JsonSetParser parser = new JsonSetParser();
             JsonSetCommand command = parser.parse(
-                    new Object[]{"json.set", "key", "path", "[true]"});
+                    toObjectArray(new Object[]{"json.set", "key", "path", "[true]"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals("[true]", command.getJson());
@@ -53,7 +53,7 @@ public class ReJsonCommandTest {
         {
             JsonDelParser parser = new JsonDelParser();
             JsonDelCommand command = parser.parse(
-                    new Object[]{"json.del", "key"});
+                    toObjectArray(new Object[]{"json.del", "key"}));
             assertEquals("key", command.getKey());
             assertEquals(".", command.getPath());
             System.out.println(command);
@@ -62,7 +62,7 @@ public class ReJsonCommandTest {
         {
             JsonDelParser parser = new JsonDelParser();
             JsonDelCommand command = parser.parse(
-                    new Object[]{"json.del", "key", "path"});
+                    toObjectArray(new Object[]{"json.del", "key", "path"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
         }
@@ -70,7 +70,7 @@ public class ReJsonCommandTest {
         {
             JsonArrAppendParser parser = new JsonArrAppendParser();
             JsonArrAppendCommand command = parser.parse(
-                    new Object[]{"json.arrappend", "key", "path", "true", "null"});
+                    toObjectArray(new Object[]{"json.arrappend", "key", "path", "true", "null"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals("true", command.getJsons()[0]);
@@ -81,7 +81,7 @@ public class ReJsonCommandTest {
         {
             JsonArrAppendParser parser = new JsonArrAppendParser();
             JsonArrAppendCommand command = parser.parse(
-                    new Object[]{"json.arrappend", "key", "path", "true"});
+                    toObjectArray(new Object[]{"json.arrappend", "key", "path", "true"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals("true", command.getJsons()[0]);
@@ -90,7 +90,7 @@ public class ReJsonCommandTest {
         {
             JsonArrInsertParser parser = new JsonArrInsertParser();
             JsonArrInsertCommand command = parser.parse(
-                    new Object[]{"json.arrinsert", "key", "path", "0", "true"});
+                    toObjectArray(new Object[]{"json.arrinsert", "key", "path", "0", "true"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals(0, command.getIndex());
@@ -101,7 +101,7 @@ public class ReJsonCommandTest {
         {
             JsonArrInsertParser parser = new JsonArrInsertParser();
             JsonArrInsertCommand command = parser.parse(
-                    new Object[]{"json.arrinsert", "key", "path", "0", "true", "null"});
+                    toObjectArray(new Object[]{"json.arrinsert", "key", "path", "0", "true", "null"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals(0, command.getIndex());
@@ -112,7 +112,7 @@ public class ReJsonCommandTest {
         {
             JsonArrPopParser parser = new JsonArrPopParser();
             JsonArrPopCommand command = parser.parse(
-                    new Object[]{"json.arrpop", "key"});
+                    toObjectArray(new Object[]{"json.arrpop", "key"}));
             assertEquals("key", command.getKey());
             assertEquals(".", command.getPath());
             assertEquals(-1, command.getIndex());
@@ -122,7 +122,7 @@ public class ReJsonCommandTest {
         {
             JsonArrPopParser parser = new JsonArrPopParser();
             JsonArrPopCommand command = parser.parse(
-                    new Object[]{"json.arrpop", "key", "path"});
+                    toObjectArray(new Object[]{"json.arrpop", "key", "path"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals(-1, command.getIndex());
@@ -131,7 +131,7 @@ public class ReJsonCommandTest {
         {
             JsonArrPopParser parser = new JsonArrPopParser();
             JsonArrPopCommand command = parser.parse(
-                    new Object[]{"json.arrpop", "key", "path", "100"});
+                    toObjectArray(new Object[]{"json.arrpop", "key", "path", "100"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals(100, command.getIndex());
@@ -140,7 +140,7 @@ public class ReJsonCommandTest {
         {
             JsonArrTrimParser parser = new JsonArrTrimParser();
             JsonArrTrimCommand command = parser.parse(
-                    new Object[]{"json.arrtrim", "key", "path", "100", "200"});
+                    toObjectArray(new Object[]{"json.arrtrim", "key", "path", "100", "200"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals(100, command.getStart());
@@ -151,7 +151,7 @@ public class ReJsonCommandTest {
         {
             JsonNumIncrByParser parser = new JsonNumIncrByParser();
             JsonNumIncrByCommand command = parser.parse(
-                    new Object[]{"json.numincrby", "key", "path", "100.542"});
+                    toObjectArray(new Object[]{"json.numincrby", "key", "path", "100.542"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals(100.542d, command.getValue(), 0.000001);
@@ -161,7 +161,7 @@ public class ReJsonCommandTest {
         {
             JsonNumIncrByParser parser = new JsonNumIncrByParser();
             JsonNumIncrByCommand command = parser.parse(
-                    new Object[]{"json.numincrby", "key", "100.542"});
+                    toObjectArray(new Object[]{"json.numincrby", "key", "100.542"}));
             assertEquals("key", command.getKey());
             assertEquals(".", command.getPath());
             assertEquals(100.542d, command.getValue(), 0.000001);
@@ -170,7 +170,7 @@ public class ReJsonCommandTest {
         {
             JsonStrAppendParser parser = new JsonStrAppendParser();
             JsonStrAppendCommand command = parser.parse(
-                    new Object[]{"json.strappend", "key", "world"});
+                    toObjectArray(new Object[]{"json.strappend", "key", "world"}));
             assertEquals("key", command.getKey());
             assertEquals(".", command.getPath());
             assertEquals("world", command.getJson());
@@ -180,7 +180,7 @@ public class ReJsonCommandTest {
         {
             JsonStrAppendParser parser = new JsonStrAppendParser();
             JsonStrAppendCommand command = parser.parse(
-                    new Object[]{"json.strappend", "key", "path", "world"});
+                    toObjectArray(new Object[]{"json.strappend", "key", "path", "world"}));
             assertEquals("key", command.getKey());
             assertEquals("path", command.getPath());
             assertEquals("world", command.getJson());

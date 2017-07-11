@@ -36,7 +36,7 @@ import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.Jso
  * @see <a href="https://github.com/RedisLabsModules/rejson">https://github.com/RedisLabsModules/rejson</a>
  * @since 1.0.0
  */
-public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
+public class JsonModuleParser extends VersionableModuleParser<JsonModule> {
 
     private static final int N_NULL = 0x1;
     private static final int N_DICT = 0x20;
@@ -61,7 +61,7 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
 
     @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public JsonModule parse(RedisInputStream in) throws IOException {
+    public JsonModule parse(RedisInputStream in, int version) throws IOException {
         DefaultRdbModuleParser parser = new DefaultRdbModuleParser(in);
         State state = S_INIT;
         Deque<Object> nodes = new LinkedList<>();
@@ -71,7 +71,7 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
         while (state != S_END) {
             switch (state) {
                 case S_INIT:
-                    type = parser.loadUnsigned().intValue();
+                    type = parser.loadUnsigned(version).intValue();
                     state = S_BEGIN_VALUE;
                     break;
                 case S_BEGIN_VALUE:
@@ -81,34 +81,34 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
                             state = S_END_VALUE;
                             break;
                         case N_BOOLEAN:
-                            node = parser.loadStringBuffer()[0] == 0x1;
+                            node = parser.loadStringBuffer(version)[0] == 0x1;
                             state = S_END_VALUE;
                             break;
                         case N_INTEGER:
-                            node = parser.loadSigned();
+                            node = parser.loadSigned(version);
                             state = S_END_VALUE;
                             break;
                         case N_NUMBER:
-                            node = parser.loadDouble();
+                            node = parser.loadDouble(version);
                             state = S_END_VALUE;
                             break;
                         case N_STRING:
-                            node = new String(parser.loadStringBuffer(), Constants.CHARSET);
+                            node = new String(parser.loadStringBuffer(version), Constants.CHARSET);
                             state = S_END_VALUE;
                             break;
                         case N_KEYVAL:
-                            nodes.push(new AbstractMap.SimpleEntry<>(new String(parser.loadStringBuffer(), Constants.CHARSET), null));
+                            nodes.push(new AbstractMap.SimpleEntry<>(new String(parser.loadStringBuffer(version), Constants.CHARSET), null));
                             indices.push(1);
                             state = S_CONTAINER;
                             break;
                         case N_DICT:
-                            int len = parser.loadUnsigned().intValue();
+                            int len = parser.loadUnsigned(version).intValue();
                             nodes.push(new JsonObject(ordered));
                             indices.push(len);
                             state = S_CONTAINER;
                             break;
                         case N_ARRAY:
-                            len = parser.loadUnsigned().intValue();
+                            len = parser.loadUnsigned(version).intValue();
                             nodes.push(new JsonArray());
                             indices.push(len);
                             state = S_CONTAINER;
@@ -136,7 +136,7 @@ public class JsonModuleParser implements VersionableModuleParser<JsonModule> {
                     if (len > 0) {
                         indices.pop();
                         indices.push(len - 1);
-                        type = parser.loadUnsigned().intValue();
+                        type = parser.loadUnsigned(version).intValue();
                         state = S_BEGIN_VALUE;
                     } else {
                         indices.pop();

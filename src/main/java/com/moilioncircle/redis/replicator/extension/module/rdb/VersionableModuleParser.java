@@ -24,7 +24,7 @@ import com.moilioncircle.redis.replicator.rdb.module.ModuleParser;
  * @see <a href="https://github.com/antirez/redis/blob/unstable/src/modules/TYPES.md">TYPES.md</a>
  * @since 1.0.0
  */
-public interface VersionableModuleParser<T extends Module> extends ModuleParser<T> {
+public abstract class VersionableModuleParser<T extends Module> implements ModuleParser<T> {
 
     /**
      * @return module type name
@@ -32,12 +32,12 @@ public interface VersionableModuleParser<T extends Module> extends ModuleParser<
      * <p>
      * regex: [a-zA-Z-_]{@literal {9}}
      */
-    String name();
+    public abstract String name();
 
     /**
      * @return module version
      * <p>
      * version range {@literal 0 <= version < 1024}
      */
-    int version();
+    public abstract int version();
 }

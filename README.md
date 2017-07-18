@@ -8,13 +8,13 @@
 
 # 2. Requirements  
 
-* redis-replicator version >= 2.2.0
+* redis-replicator version >= 2.3.0
 
 ```java  
     <dependency>
         <groupId>com.moilioncircle</groupId>
         <artifactId>redis-replicator</artifactId>
-        <version>2.2.0</version>
+        <version>2.3.0</version>
     </dependency>
 ```
 

@@ -16,10 +16,11 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrAppendCommand;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -29,11 +30,11 @@ public class JsonArrAppendParser implements NameableCommandParser<JsonArrAppendC
     @Override
     public JsonArrAppendCommand parse(Object[] command) {
         int idx = 1, newIdx = 0;
-        String key = new String((byte[]) command[idx++], Constants.CHARSET);
-        String path = new String((byte[]) command[idx++], Constants.CHARSET);
+        String key = new String((byte[]) command[idx++], UTF_8);
+        String path = new String((byte[]) command[idx++], UTF_8);
         String[] jsons = new String[command.length - idx];
         while (idx < command.length) {
-            jsons[newIdx++] = new String((byte[]) command[idx++], Constants.CHARSET);
+            jsons[newIdx++] = new String((byte[]) command[idx++], UTF_8);
         }
         return new JsonArrAppendCommand(key, path, jsons);
     }

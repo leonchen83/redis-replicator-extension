@@ -16,12 +16,13 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrInsertCommand;
 
 import java.math.BigDecimal;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -32,12 +33,12 @@ public class JsonArrInsertParser implements NameableCommandParser<JsonArrInsertC
     @Override
     public JsonArrInsertCommand parse(Object[] command) {
         int idx = 1, newIdx = 0;
-        String key = new String((byte[]) command[idx++], Constants.CHARSET);
-        String path = new String((byte[]) command[idx++], Constants.CHARSET);
-        int index = new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
+        String key = new String((byte[]) command[idx++], UTF_8);
+        String path = new String((byte[]) command[idx++], UTF_8);
+        int index = new BigDecimal(new String((byte[]) command[idx++], UTF_8)).intValueExact();
         String[] jsons = new String[command.length - idx];
         while (idx < command.length) {
-            jsons[newIdx++] = new String((byte[]) command[idx++], Constants.CHARSET);
+            jsons[newIdx++] = new String((byte[]) command[idx++], UTF_8);
         }
         return new JsonArrInsertCommand(key, path, index, jsons);
     }

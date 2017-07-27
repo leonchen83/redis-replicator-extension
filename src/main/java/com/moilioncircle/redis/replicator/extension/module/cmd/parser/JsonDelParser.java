@@ -16,10 +16,11 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonDelCommand;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -30,8 +31,8 @@ public class JsonDelParser implements NameableCommandParser<JsonDelCommand> {
     @Override
     public JsonDelCommand parse(Object[] command) {
         int idx = 1;
-        String key = new String((byte[]) command[idx++], Constants.CHARSET);
-        String path = idx == command.length ? "." : new String((byte[]) command[idx++], Constants.CHARSET);
+        String key = new String((byte[]) command[idx++], UTF_8);
+        String path = idx == command.length ? "." : new String((byte[]) command[idx++], UTF_8);
         return new JsonDelCommand(key, path);
     }
 

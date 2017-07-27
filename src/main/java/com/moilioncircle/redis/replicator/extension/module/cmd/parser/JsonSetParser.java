@@ -16,11 +16,12 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonSetCommand;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -31,12 +32,12 @@ public class JsonSetParser implements NameableCommandParser<JsonSetCommand> {
     @Override
     public JsonSetCommand parse(Object[] command) {
         int idx = 1;
-        String key = new String((byte[]) command[idx++], Constants.CHARSET);
-        String path = new String((byte[]) command[idx++], Constants.CHARSET);
-        String json = new String((byte[]) command[idx++], Constants.CHARSET);
+        String key = new String((byte[]) command[idx++], UTF_8);
+        String path = new String((byte[]) command[idx++], UTF_8);
+        String json = new String((byte[]) command[idx++], UTF_8);
         ExistType type = ExistType.NONE;
         if (idx < command.length) {
-            String str = new String((byte[]) command[idx++], Constants.CHARSET);
+            String str = new String((byte[]) command[idx++], UTF_8);
             if (str.equalsIgnoreCase("NX")) type = ExistType.NX;
             else if (str.equalsIgnoreCase("XX")) type = ExistType.XX;
         }

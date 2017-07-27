@@ -16,7 +16,6 @@
 
 package com.moilioncircle.redis.replicator.extension.module.rdb.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.extension.module.rdb.VersionableModuleParser;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonArray;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonModule;
@@ -30,6 +29,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -93,11 +93,11 @@ public class JsonModuleParser extends VersionableModuleParser<JsonModule> {
                             state = S_END_VALUE;
                             break;
                         case N_STRING:
-                            node = new String(parser.loadStringBuffer(version), Constants.CHARSET);
+                            node = new String(parser.loadStringBuffer(version), UTF_8);
                             state = S_END_VALUE;
                             break;
                         case N_KEYVAL:
-                            nodes.push(new AbstractMap.SimpleEntry<>(new String(parser.loadStringBuffer(version), Constants.CHARSET), null));
+                            nodes.push(new AbstractMap.SimpleEntry<>(new String(parser.loadStringBuffer(version), UTF_8), null));
                             indices.push(1);
                             state = S_CONTAINER;
                             break;

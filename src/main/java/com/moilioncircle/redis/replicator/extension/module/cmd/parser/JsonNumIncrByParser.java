@@ -16,10 +16,11 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonNumIncrByCommand;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -29,9 +30,9 @@ public class JsonNumIncrByParser implements NameableCommandParser<JsonNumIncrByC
     @Override
     public JsonNumIncrByCommand parse(Object[] command) {
         int idx = 1;
-        String key = new String((byte[]) command[idx++], Constants.CHARSET);
-        String path = command.length < 4 ? "." : new String((byte[]) command[idx++], Constants.CHARSET);
-        double value = Double.parseDouble(new String((byte[]) command[idx++], Constants.CHARSET));
+        String key = new String((byte[]) command[idx++], UTF_8);
+        String path = command.length < 4 ? "." : new String((byte[]) command[idx++], UTF_8);
+        double value = Double.parseDouble(new String((byte[]) command[idx++], UTF_8));
         return new JsonNumIncrByCommand(key, path, value);
     }
 

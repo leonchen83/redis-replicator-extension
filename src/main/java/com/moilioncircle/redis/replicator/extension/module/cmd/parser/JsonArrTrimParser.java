@@ -16,12 +16,13 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrTrimCommand;
 
 import java.math.BigDecimal;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -31,10 +32,10 @@ public class JsonArrTrimParser implements NameableCommandParser<JsonArrTrimComma
     @Override
     public JsonArrTrimCommand parse(Object[] command) {
         int idx = 1;
-        String key = new String((byte[]) command[idx++], Constants.CHARSET);
-        String path = new String((byte[]) command[idx++], Constants.CHARSET);
-        int start = new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
-        int stop = new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
+        String key = new String((byte[]) command[idx++], UTF_8);
+        String path = new String((byte[]) command[idx++], UTF_8);
+        int start = new BigDecimal(new String((byte[]) command[idx++], UTF_8)).intValueExact();
+        int stop = new BigDecimal(new String((byte[]) command[idx++], UTF_8)).intValueExact();
         return new JsonArrTrimCommand(key, path, start, stop);
     }
 

@@ -16,12 +16,13 @@
 
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
-import com.moilioncircle.redis.replicator.Constants;
 import com.moilioncircle.redis.replicator.cmd.CommandName;
 import com.moilioncircle.redis.replicator.extension.module.cmd.NameableCommandParser;
 import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrPopCommand;
 
 import java.math.BigDecimal;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * @author Leon Chen
@@ -31,9 +32,9 @@ public class JsonArrPopParser implements NameableCommandParser<JsonArrPopCommand
     @Override
     public JsonArrPopCommand parse(Object[] command) {
         int idx = 1;
-        String key = new String((byte[]) command[idx++], Constants.CHARSET);
-        String path = idx == command.length ? "." : new String((byte[]) command[idx++], Constants.CHARSET);
-        int index = idx == command.length ? -1 : new BigDecimal(new String((byte[]) command[idx++], Constants.CHARSET)).intValueExact();
+        String key = new String((byte[]) command[idx++], UTF_8);
+        String path = idx == command.length ? "." : new String((byte[]) command[idx++], UTF_8);
+        int index = idx == command.length ? -1 : new BigDecimal(new String((byte[]) command[idx++], UTF_8)).intValueExact();
         return new JsonArrPopCommand(key, path, index);
     }
 

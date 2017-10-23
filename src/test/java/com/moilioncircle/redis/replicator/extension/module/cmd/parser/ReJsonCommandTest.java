@@ -17,7 +17,14 @@
 package com.moilioncircle.redis.replicator.extension.module.cmd.parser;
 
 import com.moilioncircle.redis.replicator.cmd.impl.ExistType;
-import com.moilioncircle.redis.replicator.extension.module.cmd.impl.*;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrAppendCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrInsertCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrPopCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonArrTrimCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonDelCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonNumIncrByCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonSetCommand;
+import com.moilioncircle.redis.replicator.extension.module.cmd.impl.JsonStrAppendCommand;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

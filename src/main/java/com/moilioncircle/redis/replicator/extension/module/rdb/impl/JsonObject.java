@@ -16,7 +16,11 @@
 
 package com.moilioncircle.redis.replicator.extension.module.rdb.impl;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Leon Chen

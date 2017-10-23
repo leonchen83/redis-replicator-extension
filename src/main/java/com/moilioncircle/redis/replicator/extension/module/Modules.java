@@ -17,7 +17,14 @@
 package com.moilioncircle.redis.replicator.extension.module;
 
 import com.moilioncircle.redis.replicator.Replicator;
-import com.moilioncircle.redis.replicator.extension.module.cmd.parser.*;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonArrAppendParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonArrInsertParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonArrPopParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonArrTrimParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonDelParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonNumIncrByParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonSetParser;
+import com.moilioncircle.redis.replicator.extension.module.cmd.parser.JsonStrAppendParser;
 import com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser;
 
 /**

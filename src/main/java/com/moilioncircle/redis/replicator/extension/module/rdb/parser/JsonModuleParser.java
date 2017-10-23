@@ -28,7 +28,11 @@ import java.util.AbstractMap;
 import java.util.Deque;
 import java.util.LinkedList;
 
-import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.*;
+import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.S_BEGIN_VALUE;
+import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.S_CONTAINER;
+import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.S_END;
+import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.S_END_VALUE;
+import static com.moilioncircle.redis.replicator.extension.module.rdb.parser.JsonModuleParser.State.S_INIT;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**

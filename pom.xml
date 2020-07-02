@@ -65,7 +65,7 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <commons.logging.version>1.2</commons.logging.version>
-        <redis.replicator.version>[2.3.0,)</redis.replicator.version>
+        <redis.replicator.version>[3.4.0,)</redis.replicator.version>
     </properties>
 
     <dependencies>
@@ -275,6 +275,25 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>examples</source>
+                            </sources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

@@ -16,19 +16,17 @@
 
 package com.moilioncircle.redis.replicator.extension.module.rejson;
 
+import java.io.IOException;
+
 import com.moilioncircle.redis.replicator.Configuration;
 import com.moilioncircle.redis.replicator.RedisReplicator;
 import com.moilioncircle.redis.replicator.Replicator;
-import com.moilioncircle.redis.replicator.cmd.Command;
-import com.moilioncircle.redis.replicator.cmd.CommandListener;
+import com.moilioncircle.redis.replicator.event.Event;
+import com.moilioncircle.redis.replicator.event.EventListener;
 import com.moilioncircle.redis.replicator.extension.module.Modules;
 import com.moilioncircle.redis.replicator.extension.module.rdb.impl.JsonModule;
-import com.moilioncircle.redis.replicator.rdb.RdbListener;
 import com.moilioncircle.redis.replicator.rdb.datatype.KeyStringValueModule;
-import com.moilioncircle.redis.replicator.rdb.datatype.KeyValuePair;
 import com.moilioncircle.redis.replicator.rdb.datatype.Module;
-
-import java.io.IOException;
 
 /**
  * @author Leon Chen
@@ -38,17 +36,11 @@ public class ReJsonExample {
     public static void main(String[] args) throws IOException {
         Replicator r = new RedisReplicator("127.0.0.1", 6379, Configuration.defaultSetting());
         Modules.rejson(r);
-        r.addCommandListener(new CommandListener() {
+        r.addEventListener(new EventListener() {
             @Override
-            public void handle(Replicator replicator, Command command) {
-                System.out.println(command);
-            }
-        });
-        r.addRdbListener(new RdbListener.Adaptor() {
-            @Override
-            public void handle(Replicator replicator, KeyValuePair<?> kv) {
-                if (!(kv instanceof KeyStringValueModule)) return;
-                Module module = ((KeyStringValueModule) kv).getValue();
+            public void onEvent(Replicator replicator, Event event) {
+                if (!(event instanceof KeyStringValueModule)) return;
+                Module module = ((KeyStringValueModule) event).getValue();
                 if (!(module instanceof JsonModule)) return;
                 JsonModule jsonModule = (JsonModule) module;
                 System.out.println(jsonModule.getJson());
